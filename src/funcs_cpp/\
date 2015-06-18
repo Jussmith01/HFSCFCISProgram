@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <sstream>
+#include <string.h>
+#include <string>
+#include <cmath>
+#include <fstream>
+#include <time.h>
+
+#include "../utils_cpp/lib_includes.h"
+#include "../classes/classes.h"
+#include "../scf_main/scf_classes.h"
+#include "func_classes.h"
+#include "lib_integrals.h"
+
+using namespace std;
+
+//________________________________________________________________________//
+//      *************************************************************     //
+//                        Calculate the Overlap
+//      Function that calculates the overlap value with given inputs.
+//      *************************************************************     //
+/*                 ----Author: Justin Smith       ----
+                   ----Date Modified: 10/15/2014  ----
+                   ----Modified By:               ----
+*/
+
+float calculate_overlap()
+{
+	float rtnval;
+
+	rtnval = 1.1;
+
+	return rtnval;	
+}
+
+//________________________________________________________________________//
+//      *************************************************************     //
+//                        Overlap Main Function
+//      Fills the overlap (S) matrix in the scf class.
+//      *************************************************************     //
+/*                 ----Author: Justin Smith       ----
+                   ----Date Modified: 10/15/2014  ----
+                   ----Modified By:               ----
+*/
+
+extern void overlap_main(MemHandler *data_mem,scf_data *scf,dataOutput *optfile)
+{
+	//Set some variables
+	timer int_timer;
+        optfile->ofile << "\nBeginning Overlap Calculations...\n";
+	int_timer.set_timer();
+	array_idx_funcs aif;//load 2d array manipulation class
+
+	//**************************
+	//Start Overlap Computations	
+	//*************************
+
+	for (int row = 0; row < scf->orbitals; ++row) 
+	{
+		for (int col = 0; col < scf->orbitals; ++col)
+		{
+			float Sij = calculate_overlap();
+			aif.rpl_2dval(row,col,Sij,scf->S);
+		}
+	}
+	
+	//*************************
+	//End Overlap Computations
+	//*************************
+
+	//Som ending functions
+	int_timer.end_timer();
+	string message = "Overlap Calculation Time: ";
+	int_timer.print_time(message,optfile->ofile);
+        optfile->ofile << "Ending Overlap Calculations.\n\n";
+}
+

@@ -1,0 +1,72 @@
+Executable:SCF_vB1.6
+$c++:
+	compiler:
+		g++
+	flags:
+		-std=c++11
+	dir:
+		utils_cpp/
+	files:
+        	lib_timer_class
+        	lib_classes
+		lib_ipt_file
+		lib_opt_class
+		lib_parms_class
+        dir:
+                classes/
+        files:
+                memhandler_class
+		stong_class
+		four_elec_index
+        dir:
+                funcs_cpp/
+        files:
+                array_2d_funcs
+		lib_integrals_main
+		lib_integrals_overlap
+		lib_math
+		lib_integrals_kinetic
+		lib_integrals_nuclear
+		lib_integrals_electron
+		lib_nuclear_repulsion
+		lib_TDNumerInt
+		lib_integrals_transdipole
+        dir:
+                pop_analysis_cpp/
+        files:
+                lib_pop_analysis
+        dir:
+                cis_calculations/
+        files:
+                lib_cis
+        dir:
+                scf_main/
+        files:
+                scf_handler
+		lib_scf_main
+		lib_scf_funcs
+		lib_basic_linear_alg
+		lib_jacobi_algorithm
+		lib_huckle
+        dir: 
+        	none  
+        files:
+        	main
+	DONE
+$ENDc++
+$cuda:
+	compiler:
+	flags:
+        dir: 
+        files:
+	DONE
+$ENDcuda
+$linkerflags:
+	compiler:
+		g++
+	flags:
+		-std=c++11
+	DONE
+$ENDlinkerflags
+$END OF FILE$
+

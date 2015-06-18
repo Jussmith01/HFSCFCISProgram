@@ -1,0 +1,98 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <sstream>
+#include <string.h>
+#include <string>
+#include <cmath>
+#include <fstream>
+#include <time.h>
+#include <iostream>
+#include <iomanip>
+
+#include "../utils_cpp/lib_includes.h"
+#include "../classes/classes.h"
+#include "scf_classes.h"
+#include "../funcs_cpp/func_classes.h"
+
+using namespace std;
+
+//________________________________________________________________________//
+//      *************************************************************     //
+//                     Self Consistant Field Function
+//      Carrys out the SCF iteration calculations and obtains energy.
+//      *************************************************************     //
+/*                 ----Author: Justin Smith       ----
+                   ----Date Modified: 10/31/2014  ----
+                   ----Modified By:               ----
+*/
+
+extern void scf_iteration_main(MemHandler *data_mem,scf_data *scf,dataOutput *optfile)
+{
+	optfile->ofile << "\n|--------------Begin SCF Calculations-------------|\n";
+	//********************************************//
+        //              Calc S^(-1/2)                 //
+        //********************************************//
+	optfile->ofile << "Calculate S^(-1/2)... \n";
+	int N = scf->orbitals;
+
+	Inverse_sqrt(scf->S,N);//Produce S^(1/2)
+
+	optfile->Matrix_printer("S^(-1/2)",scf->S,N);
+
+	int it = 0;
+		
+	memcpy(scf->F,scf->Hcore,N * N * sizeof(float));
+	
+	float energy_old = 0;
+	float scf_converg = 0;
+
+	while (abs(scf_converg) > 1.0E-6 || it ==0)
+	{
+        	optfile->ofile << "\n|========================= Iteration " << it + 1 << " =========================|\n";
+
+		optfile->Matrix_printer("F",scf->F,N);
+
+		Matrix_Mult(scf->WM,scf->F,0,scf->S,0,N);//Calculate F = S^(-1/2) * F' * S(-1/2)
+        	Matrix_Mult(scf->F,scf->S,0,scf->WM,0,N);
+
+		optfile->Matrix_printer("F'",scf->F,N);
+
+		optfile->ofile << "Running Jacobi Algorithm... \n";
+
+		//Find eigen vectors and values
+		float *convergence_data;
+		convergence_data = new float [3];
+
+        	convergence_data[0] = data_mem->ipt_parms.j_conv;
+	        convergence_data[1] = 10000;
+		Jacobi_Algorithm(scf->WM,scf->E,scf->F,N,convergence_data);//Calculate E and C' from F'
+		optfile->ofile << "Jacobi Iterations: " << int_to_str(convergence_data[2]) << "\n";
+		
+		delete [] convergence_data; convergence_data = NULL;
+
+        	Matrix_Mult(scf->C,scf->WM,0,scf->S,0,N);//Calculate C = S^(-1/2) * C'
+
+		optfile->Matrix_printer("Eigen Vectors",scf->C,N);
+		optfile->Array_printer("Eigen Values",scf->E,N,4);
+
+		Produce_Density(data_mem,scf,optfile);
+		Produce_Electronic_Terms(data_mem,scf,optfile);
+		float Energy = Calc_Electronic_Energy(data_mem,scf,optfile);
+		
+		scf_converg = Energy - energy_old;
+		energy_old = Energy;
+
+        	optfile->ofile << "\nCalculated Energy of this Iteration: " << Energy << "\n";
+        	cout << "\nIteration (" << it << ") Energy: " << Energy << " Convergence: " << abs(scf_converg) << "\n";
+
+		optfile->Matrix_printer("Rho",scf->Rho,N);
+
+		if (it == 20)
+		{
+			break;
+			optfile->ofile << "\n!!!!!! SCF FAILED TO CONVERGE !!!!!!\n";
+		}
+		++it;
+	}
+	optfile->ofile << "\n|---------------End SCF Calculations--------------|\n\n";
+}
