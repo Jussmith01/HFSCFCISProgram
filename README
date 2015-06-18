@@ -160,3 +160,6 @@ Implemented the Huckel method to produce the initial density matrix "guess" to h
 program convergence. The program produces the valence density matrix, then extends 
 that to a full density matrix by adding the core and empty orbitals to the valence 
 desity matrix.
+
+_______________________________________________________________________________________
+7) CIS Added to the program
