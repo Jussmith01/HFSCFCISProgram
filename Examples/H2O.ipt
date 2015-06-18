@@ -1,0 +1,18 @@
+$PARAM
+3               !Number of contracted gaussians per orbital "n of STO-nG"
+0               !Charge on the molecule
+1.0E-30         !SCF Jacobi Convergence
+1.0E-7          !SCF Energy Convergence
+1               !Output verbosity (0 minimal, 1 all)
+1		!CIS Flag
+1		!TD Flag
+DataH2O		!Output filename
+$ENDPARAM
+
+$COORD
+8        0.000000    0.000000    0.127000
+1        0.000000    0.758000   -0.508000
+1        0.000000   -0.758000   -0.508000
+$ENDCOORD
+$END OF FILE$
+
