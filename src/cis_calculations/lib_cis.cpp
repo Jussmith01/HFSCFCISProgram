@@ -921,7 +921,7 @@ extern void cis_energy_calc(MemHandler *data_mem,scf_data *scf,dataOutput *optfi
                 //******************************************************//
                 //    Build and Diagonalize CIS Hamiltonian Matrix      //
                 //******************************************************//
-		cout << "Cuilding and Diagonalizing the CIS Hamiltonian...\n";
+		cout << "Building and Diagonalizing the CIS Hamiltonian...\n";
                 CIS_tools CIS(N,scf->td_flag,data_mem->ipt_parms.dataout);//Allocate Class Memory
                 CIS.ProduceOrbitalEnergies(scf,data_mem,Hcore,TEI,optfile);
 		CIS.BuildSpinAdaptedHamiltonians(optfile,TEI);
@@ -929,7 +929,7 @@ extern void cis_energy_calc(MemHandler *data_mem,scf_data *scf,dataOutput *optfi
 
 		//******************************************************//
                 //  Transform the Transition Dipole Matrix to MO Space  //
-		//	Also Calculates the Sqare values into TDSM	//
+		//	Also Calculates the Square values into TDSM	//
                 //******************************************************//
 		cout << "Calculate Transition Dipoles...\n";
 		CIS.MOTransformTDM(scf,optfile);

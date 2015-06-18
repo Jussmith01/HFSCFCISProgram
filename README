@@ -6,7 +6,7 @@ Pre-Install)
 Required libraries - only c++ std 11 libraries are required. All other functions were
 written in house and are included with the program.
 
-1) Export Install Directory with export SCF_HOME=%INSTALL_DIR%/SCF_vB1.2/
+1) Export Install Directory with export SCF_HOME=%INSTALL_DIR%/HFSCFCISProgram/
 2) Open configure_install file and set compiler (if other than g++) and 
    necessary flags. 
 3) Run the command ./INSTALL configure_install in the src folder
