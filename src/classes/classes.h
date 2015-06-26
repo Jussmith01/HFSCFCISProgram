@@ -4,6 +4,7 @@
 
 //Custom includes
 #include "../utils_cpp/lib_includes.h"
+#include <unordered_map>
 
 // ********************************************************************* //
 // ***************************DEFINE CLASSES**************************** //
@@ -134,7 +135,7 @@ class STOnG_handler
 //      *************************************************************     //
 //                              Hash Class
 //      *************************************************************     //
-class Val_Store
+/*class Val_Store
 {
         public:
         //-------------------------
@@ -157,13 +158,13 @@ class Val_Store
 
 		return rtnval;
 	};
-};
+};*/
 
 //________________________________________________________________________//
 //      *************************************************************     //
 //                            Key Builder Class
 //      *************************************************************     //
-class Four_Elec_Index
+/*class Four_Elec_Index
 {
         public:
         //-------------------------
@@ -182,6 +183,32 @@ class Four_Elec_Index
 	void set_val(double val,int i,int j,int k,int l);
 	double get_val(int i,int j,int k,int l);
 	void free_val_table(void);
+};*/
+
+//________________________________________________________________________//
+//      *************************************************************     //
+//                            Key Builder Class
+//      *************************************************************     //
+class Four_Elec_Index
+{
+        public:
+        //-------------------------
+        //Public Class Declarations
+        //-------------------------
+        unordered_map<std::string,double> values;
+        long int num_val;
+
+        //-----------------------------
+        //Public Member Class Functions
+        //-----------------------------
+        int alloc_val_table(int orbitals);
+        std::string produce_unique_ident(int i,int j,int k,int l);
+        long int produce_ident(int i,int j,int k,int l);
+        //int get_mem_loc(int i,int j,int k,int l);
+        void set_val(double val,int i,int j,int k,int l);
+        double get_val(int i,int j,int k,int l);
+        void free_val_table(void);
 };
+
 
 #endif

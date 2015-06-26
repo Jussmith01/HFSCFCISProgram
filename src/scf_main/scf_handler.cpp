@@ -63,7 +63,7 @@ void scf_data::mem_alloc (dataOutput* optfile)
         int fset = orbitals * (orbitals + 1) / (int) (2);
         int degenerate = fset * (fset + 1) / (int) (2);
 
-	memory_req = (((2 * orbitals) + (13 * orbitals * orbitals))* sizeof(double)) * ((degenerate * sizeof(Val_Store)));//Num Matricies * orbitals^2 * numbytes
+	memory_req = (((2 * orbitals) + (13 * orbitals * orbitals))* sizeof(double));//Num Matricies * orbitals^2 * numbytes
 	optfile->ofile << "Total Number of Basis Functions: " << orbitals << "\n";
 
 	//Set Unit Size for Memory Required output

@@ -24,10 +24,10 @@ int Four_Elec_Index::alloc_val_table(int orbitals)
 	int fset = orbitals * (orbitals + 1) / (int) (2);
 	int degenerate = fset * (fset + 1) / (int) (2);
 
-	Val_Table = new Val_Store [degenerate];
+	/*Val_Table = new Val_Store [degenerate];
 	for (int m = 0; m < degenerate; ++m)
 		{Val_Table[m].key = 0;}
-
+	*/
 	//num_deg = degenerate;
 	num_val = degenerate;
 	return degenerate;
@@ -42,8 +42,9 @@ int Four_Elec_Index::alloc_val_table(int orbitals)
 */
 void Four_Elec_Index::free_val_table()
 {
-	delete [] Val_Table;
-        Val_Table = NULL;
+	//delete [] Val_Table;
+        //Val_Table = NULL;
+	values.clear();
 };
 
 /*____________________________________________________________________________
@@ -55,9 +56,9 @@ This program allocates all necessary memory for the input data.
 */
 void Four_Elec_Index::set_val(double val,int i,int j,int k,int l)
 {
-	long int key = produce_unique_ident(i,j,k,l);
+	std::string key = produce_unique_ident(i,j,k,l);
 
-	int comp = 1;
+	/*int comp = 1;
 	int m = 0;
 
 	while (comp == 1)
@@ -72,7 +73,9 @@ void Four_Elec_Index::set_val(double val,int i,int j,int k,int l)
 			break;
 		}
 		++m;
-	}
+	}*/
+
+	values[key.c_str()]=val;
 };
 
 /*____________________________________________________________________________
@@ -84,9 +87,14 @@ This program allocates all necessary memory for the input data.
 */
 double Four_Elec_Index::get_val(int i,int j,int k,int l)
 {
-        int pos = get_mem_loc(i,j,k,l);
+        /*int pos = get_mem_loc(i,j,k,l);
 
-	return Val_Table[pos].value;
+	return Val_Table[pos].value;*/
+
+        std::string key = produce_unique_ident(i,j,k,l);
+	double val=values[key.c_str()];
+
+	return val;
 };
 
 /*____________________________________________________________________________
@@ -96,7 +104,7 @@ double Four_Elec_Index::get_val(int i,int j,int k,int l)
                    ----Modified By:               ----
 This program allocates all necessary memory for the input data.
 */
-int Four_Elec_Index::get_mem_loc(int i,int j,int k,int l)
+/*int Four_Elec_Index::get_mem_loc(int i,int j,int k,int l)
 {
         long int key = produce_unique_ident(i,j,k,l);
 
@@ -118,7 +126,7 @@ int Four_Elec_Index::get_mem_loc(int i,int j,int k,int l)
 
 	//cout << "NUMSKIP: " << m << "\n";
 	return rtnval;
-};
+};*/
 
 /*____________________________________________________________________________
                    ----Return Ident               ----
@@ -171,7 +179,7 @@ long int Four_Elec_Index::produce_ident(int i,int j,int k,int l)
                    ----Modified By:                  ----
 
 */
-long int Four_Elec_Index::produce_unique_ident (int i,int j,int k,int l)
+std::string Four_Elec_Index::produce_unique_ident (int i,int j,int k,int l)
 {
                 int tmpi,tmpi2;
                 int tmpj,tmpj2;
@@ -223,8 +231,10 @@ long int Four_Elec_Index::produce_unique_ident (int i,int j,int k,int l)
                 }
 
 		long int rtnval = produce_ident(tmpi2,tmpj2,tmpk2,tmpl2);
+		std::stringstream ss;
+		ss << rtnval;
 
                 //cout << "i: " << i << " j: " << j << " k: " << k << " l: " << l << " RETURN:" << rtnval << "\n";
-                return rtnval;
+                return ss.str();
 }
 

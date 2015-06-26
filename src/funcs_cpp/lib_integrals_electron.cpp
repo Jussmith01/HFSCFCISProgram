@@ -330,8 +330,8 @@ extern void electron_repulsion_main(MemHandler *data_mem,scf_data *scf,dataOutpu
         for (int k = i; k < scf->orbitals; ++k) {
         for (int l = k; l < scf->orbitals; ++l) {
 
-                if ((long int)scf->FEI.produce_unique_ident(i,j,k,l) == (long int)scf->FEI.produce_ident(i,j,k,l))
-                {
+                //if (scf->FEI.produce_unique_ident(i,j,k,l).compare(scf->FEI.produce_ident(i,j,k,l))==0)
+                //{
 			//int testval = scf->FEI.produce_ident(i,j,k,l);
 			//ofstream myfile;
                         //myfile.open ("edata.bin", ios::app);
@@ -355,7 +355,7 @@ extern void electron_repulsion_main(MemHandler *data_mem,scf_data *scf,dataOutpu
 			//}
 
                         ++scf->num_deg;
-                }
+                //}
                 ++count;
         }}}}
 
