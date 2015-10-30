@@ -46,8 +46,8 @@ However, molecules as large as nitro benzene have been tested and give correct e
 to ~ 6 sig figs.
 
 Admittedly the program is a memory hog. It explicitely stores and calculates both the 
-upper and lower triangular of all symmetric matricies. It also store all zero values 
-from orthoganol atomic orbitals. This can be changed very easily, however, I left it 
+upper and lower triangular of all symmetric matricies. It also stores all zero values 
+from orthogonal atomic orbitals. This can be changed very easily, however, I left it 
 this way for testing of the integrals. 
 
 Included methods:
