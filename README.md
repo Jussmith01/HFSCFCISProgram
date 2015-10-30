@@ -109,7 +109,7 @@ D (a set of eigenvalues) using the Jacobi iterative algorithm.
 
 	S = V * D * V^(H)
 
-Currently, this function seems to work purposely.
+Currently, this function works properly.
 _______________________________________________________________________________________
 4) SCF Main Implemented
 
@@ -148,13 +148,13 @@ Currently carries out the linear algebra calculations in the following order:
    the change in energy between steps. This can be set in the input file.
 
 _______________________________________________________________________________________
-5) Mulliken Population Analysis Program
+8) Mulliken Population Analysis Program
 
 Currently calculates individual orbital populations, total atom populations, total
 atom Mulliken charge, and total molecule population/charge.
  
 _______________________________________________________________________________________
-6) Huckel Method Initial Density Production
+9) Huckel Method Initial Density Production
 
 Implemented the Huckel method to produce the initial density matrix "guess" to help 
 program convergence. The program produces the valence density matrix, then extends 
@@ -162,4 +162,4 @@ that to a full density matrix by adding the core and empty orbitals to the valen
 desity matrix.
 
 _______________________________________________________________________________________
-7) CIS Added to the program
+10) CIS Added to the program
