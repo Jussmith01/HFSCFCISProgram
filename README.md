@@ -1,4 +1,4 @@
-CURRENT VERSION: Beta 1.3
+CURRENT VERSION: Beta 1.6
 _______________________________________________________________________________________
 Installation Instructions:
 
