@@ -24,7 +24,7 @@ $PARAM
 1               !Output verbosity (0 minimal, 1 all)
 $ENDPARAM
 
-Notes can be writted outside of the delimiters without causing an error.
+Notes can be written outside of the delimiters without causing an error.
 
 $COORD
         1       -1.12798434        1.545547           2.2132132
